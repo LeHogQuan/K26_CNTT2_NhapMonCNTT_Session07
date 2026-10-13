@@ -1,0 +1,36 @@
+1. Phân tích
+Lỗi :
+Select-String -Path server.log -Pattern "critical" -CaseSensitive | Out-File -Append daily_critical.txt
+- -Pattern "critical": tìm từ viết thường.
+
+- -CaseSensitive: yêu cầu phân biệt chữ hoa,  thường
+
+- file server.log, các dòng lỗi lại ghi CRITICAL viết hoa.
+
+Vì vậy lệnh không tìm thấy dòng nào khớp. File daily_critical.txt không có nội dung lỗi, chỉ có dòng tiêu đề và dòng đếm số dòng.
+
+
+2. 
+
+Sửa bằng cách bỏ tham số -caseSensitive và tìm từ critica
+
+Bat dau quet log
+
+"=== Bat dau quet log: $(Get-Date) ===" | Out-File daily_critical.txt
+
+Tim cac dong loi critical
+
+Select-String -Path server.log -Pattern "CRITICAL" | Out-File -Append daily_critical.txt
+
+Dem so dong loi
+
+$ErrorCount = (Select-String -Path server.log -Pattern "CRITICAL").Count
+
+"=== Hoan tat. So dong loi: $ErrorCount ===" | Out-File -Append daily_critical.txt
+
+3. 
+2 dòng lỗi
+
+4. Nếu file server.log không tồn tại
+
+-powershel  sẽ báo lỗi vì không tìm thấy file server.log lệnh select-string ko đọc dữ liệu từ file không tồn tại nên các dòng lỗi sẽ không được hiển thị. Tuy nhiên, nếu script không có xử lý lỗi riêng các lệnh tiếp theo vẫn có thể chạy và tạo file kết quả khoh đủ.
