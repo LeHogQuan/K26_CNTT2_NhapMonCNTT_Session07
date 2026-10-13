@@ -1,0 +1,13 @@
+1. sơ đồ
+
+b1: Đọc file access.log bằng lệnh Get-Content.
+
+b2: Lọc các dòng chứa chữ TIMEOUT bằng lệnh Select-String.
+
+b3: Đếm số dòng tìm được bằng thuộc tính .Count.
+
+
+
+2. Câu lệnh PowerShell
+
+(Get-Content .\access.log | Select-String -Pattern "TIMEOUT").Count
